@@ -29,7 +29,7 @@ failure - Configures service failure actions.
 
 Usage
 
-sc_clone <command> <service_name> [options]
+    sc_clone <command> <service_name> [options]
 
 
 Examples
@@ -71,36 +71,36 @@ Open a terminal (Developer Command Prompt for VS).
 
 Compile the code using the following command:
 
-cl /std:c++17 /EHsc /Fe:sc_clone.exe sc_clone.cpp
+    cl /std:c++17 /EHsc /Fe:sc_clone.exe sc_clone.cpp
 
 
 Logging and Monitoring
 
 To analyze the execution and detect the use of this tool, Sysmon and Procmon can be utilized:
 
-  Sysmon
 
-    Configure Sysmon to log process creation, service modifications, and registry changes.
+Sysmon
 
-    Use a custom Sysmon configuration to track changes to services.
+Configure Sysmon to log process creation, service modifications, and registry changes.
 
-  Procmon
+Use a custom Sysmon configuration to track changes to services.
 
-    Filter sc_clone.exe execution and service-related registry modifications.
+
+Procmon
+
+Filter sc_clone.exe execution and service-related registry modifications.
+
     
 
 Detection Methods
 
   Windows Event Logs
-
     Monitor Event IDs related to service creation (7045), modification, and execution (4697, 7036).
 
   Sysmon Logs
-
     Track process creation events and command-line arguments to detect unauthorized service modifications.
 
   Defensive Monitoring
-
     Use SIEM tools to alert suspicious modifications to services outside of administrator-approved tools.
     
 
