@@ -1,0 +1,13 @@
+CC = cl
+CFLAGS = /std:c++17 /EHsc
+LFLAGS =
+TARGET = sc_clone.exe
+SRC = sc_clone.cpp
+
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) /Fe:$(TARGET) $(LFLAGS)
+
+clean:
+	del $(TARGET)
