@@ -73,6 +73,29 @@ Compile the code using the following command:
 
     cl /std:c++17 /EHsc /Fe:sc_clone.exe sc_clone.cpp
 
+Compiling with nmake (MSVC)
+
+Open a Developer Command Prompt for VS.
+
+Navigate to the directory containing the source code.
+
+Run the following command to compile:
+
+    nmake -f Makefile.nmake
+
+To clean up compiled files:
+
+    nmake clean
+    
+
+Compiling with cl (MSVC manually)
+
+Alternatively, compile the code using the following command:
+
+    cl /std:c++17 /EHsc /Fe:sc_clone.exe sc_clone.cpp
+
+
+
 
 Logging and Monitoring
 
