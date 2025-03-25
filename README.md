@@ -26,39 +26,42 @@ config - Modifies the configuration of an existing service.
 
 failure - Configures service failure actions.
 
+
 Usage
 
 sc_clone <command> <service_name> [options]
+
 
 Examples
 
 Query the status of a service:
 
-sc_clone query MyService
+    sc_clone query MyService
 
 Create a new service:
 
-sc_clone create MyService "C:\\Path\\To\\Service.exe"
+    sc_clone create MyService "C:\\Path\\To\\Service.exe"
 
 Start a service:
 
-sc_clone start MyService
+    sc_clone start MyService
 
 Stop a service:
 
-sc_clone stop MyService
+    sc_clone stop MyService
 
 Delete a service:
 
-sc_clone delete MyService
+    sc_clone delete MyService
 
 Modify service configuration:
 
-sc_clone config MyService type= own start= auto
+    sc_clone config MyService type= own start= auto
 
 Configure service failure actions:
 
-sc_clone failure MyService reset= 86400 actions= restart/5000
+    sc_clone failure MyService reset= 86400 actions= restart/5000
+    
 
 Compilation
 
@@ -70,33 +73,36 @@ Compile the code using the following command:
 
 cl /std:c++17 /EHsc /Fe:sc_clone.exe sc_clone.cpp
 
+
 Logging and Monitoring
 
 To analyze the execution and detect the use of this tool, Sysmon and Procmon can be utilized:
 
-Sysmon
+  Sysmon
 
-Configure Sysmon to log process creation, service modifications, and registry changes.
+    Configure Sysmon to log process creation, service modifications, and registry changes.
 
-Use a custom Sysmon configuration to track changes to services.
+    Use a custom Sysmon configuration to track changes to services.
 
-Procmon
+  Procmon
 
-Filter sc_clone.exe execution and service-related registry modifications.
+    Filter sc_clone.exe execution and service-related registry modifications.
+    
 
 Detection Methods
 
-Windows Event Logs
+  Windows Event Logs
 
-Monitor Event IDs related to service creation (7045), modification, and execution (4697, 7036).
+    Monitor Event IDs related to service creation (7045), modification, and execution (4697, 7036).
 
-Sysmon Logs
+  Sysmon Logs
 
-Track process creation events and command-line arguments to detect unauthorized service modifications.
+    Track process creation events and command-line arguments to detect unauthorized service modifications.
 
-Defensive Monitoring
+  Defensive Monitoring
 
-Use SIEM tools to alert suspicious modifications to services outside of administrator-approved tools.
+    Use SIEM tools to alert suspicious modifications to services outside of administrator-approved tools.
+    
 
 Additional Notes
 
