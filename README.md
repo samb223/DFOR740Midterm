@@ -94,7 +94,9 @@ Alternatively, compile the code using the following command:
 
     cl /std:c++17 /EHsc /Fe:sc_clone.exe sc_clone.cpp
 
-
+Compiling with GCC (manually)
+        
+    x86_64-w64-mingw32-g++ -o sc_clone.exe sc_clone.cpp -std=c++17 -municode -ladvapi32
 
 
 Logging and Monitoring
