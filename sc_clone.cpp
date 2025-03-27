@@ -264,15 +264,31 @@ void ConfigureService(const std::wstring& serviceName, const std::wstring& start
         LocalFree(pServiceConfig);
     } 
     else { 
-        // If startType specified, modify the service configuration
-        std::wcout << L"[SC_CLONE] Updating service start type to: " << startType << std::endl;
+        // Determine start type based on user input
+        DWORD dwStartType = SERVICE_NO_CHANGE;
+        if (startType == L"auto") {
+            dwStartType = SERVICE_AUTO_START;
+        } else if (startType == L"manual") {
+            dwStartType = SERVICE_DEMAND_START;
+        } else if (startType == L"disabled") {
+            dwStartType = SERVICE_DISABLED;
+        } else {
+            std::wcerr << L"[SC_CLONE] Invalid start type: " << startType << L". Use 'automatic', 'manual', or 'disabled'." << std::endl;
+            CloseServiceHandle(hService);
+            CloseServiceHandle(hSCManager);
+            return;
+        }
 
+        // Apply the configuration change
+        std::wcout << L"[SC_CLONE] Updating service start type to: " << startType << std::endl;
         if (!ChangeServiceConfigW(hService, 
                                   SERVICE_NO_CHANGE, 
-                                  startType == L"automatic" ? SERVICE_AUTO_START : SERVICE_DISABLED, 
+                                  dwStartType, 
                                   SERVICE_ERROR_NORMAL,
                                   NULL, NULL, NULL, NULL, NULL, NULL, NULL)) {
             PrintErrorMessage(L"[SC_CLONE] ChangeServiceConfigW failed with error code: ", GetLastError());
+        } else {
+            std::wcout << L"[SC_CLONE] Service start type successfully changed to: " << startType << std::endl;
         }
     }
 
@@ -482,4 +498,3 @@ int wmain(int argc, wchar_t* argv[]) {
     
     return 0;
 }
-
