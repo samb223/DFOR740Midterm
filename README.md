@@ -54,9 +54,9 @@ Delete a service:
 
     sc_clone delete MyService
 
-Modify service configuration:
+Modify service configuration start type:
 
-    sc_clone config MyService type= own start= auto
+    sc_clone config MyService auto
 
 Configure service failure actions:
 
